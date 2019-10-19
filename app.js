@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const { port } = require('./config/config');
 const { configureWebPush } = require('./helpers/webPush');
@@ -7,6 +8,7 @@ const { configureWebPush } = require('./helpers/webPush');
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.post('/subscribe', (req, res) => {
 
