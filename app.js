@@ -6,7 +6,7 @@ const { configureWebPush } = require('./helpers/webPush');
 
 const app = express();
 
-app.use(bodyParser.json({ type: 'application/*+json' }));
+app.use(bodyParser.json());
 
 app.post('/subscribe', (req, res) => {
 
@@ -14,15 +14,13 @@ app.post('/subscribe', (req, res) => {
 
     res.status(201).json({});
 
-    const payload = JSON.stringify({ title: "Push Test" });
+    const payload = JSON.stringify({ title: "Push Test", body: "Hello World!", icon: 'https://img8.apk.tools/150/b/d/1/com.abdallah_abdelazim.helloworld.png' });
 
     const webPush = configureWebPush();
 
     webPush
         .sendNotification(subscription, payload)
         .catch(err => console.error(err));
-
-    res.send(config.VAOIDPrivateKey);
 });
 
 app.listen(port, () => {
